@@ -24,10 +24,10 @@ def print_help():
     """
 
 def get_input(musicBox):
+    """ 处理输入 """
     getch  = Getch.Getch()
     while True:
         action = getch()
-        print action
         if action == 'h':   # help
             print_help()
         elif action == 's': # play music
@@ -50,7 +50,6 @@ def get_input(musicBox):
         elif action == 'q':
             musicBox.stop()
             break
-    thread.exit()
 
 if __name__ == '__main__':
 
@@ -59,5 +58,5 @@ if __name__ == '__main__':
     thread.start_new_thread(get_input, (m,))
 
     while 1:
-        time.sleep(9)
+        time.sleep(10)
 

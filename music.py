@@ -6,6 +6,7 @@ import time
 import pygame
 
 class MusicBox():
+    """ 音乐播放列表 """
 
     def __init__(self, musics):
         self.__musics = musics
@@ -29,9 +30,10 @@ class MusicBox():
         return self.__musics[-1]
 
 class MusicPlayer():
+    """ 播放音乐类 """
 
     def __init__(self):
-        self.__musicBox = MusicBox(['a.mp3', 'b.mp3', 'c.mp3', 'm.mp3'])
+        self.__musicBox = MusicBox(['music/a.mp3', 'music/b.mp3',  'music/m.mp3'])
         self.__isPause = False
         self.__initMixer()
 
@@ -87,15 +89,4 @@ class MusicPlayer():
     def play_previous(self):
         pygame.mixer.music.load(self.__musicBox.get_previous())
         pygame.mixer.music.play()
-
-
-if __name__ == '__main__':
-
-    m = MusicPlayer()
-    m.start()
-    m.play()
-    m.play_next()
-    time.sleep(5)
-    m.previous()
-
 
