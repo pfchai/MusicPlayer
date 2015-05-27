@@ -1,16 +1,27 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import time
-
 import pygame
+import os.path
+
+
+class Music():
+    """ music """
+    def __init__(self, musicPath):
+        self.__musicPath = musicPath
+        self.__musicName = os.path.basename(musicPath).split(".")[0]
+
+    def get_music(self):
+        return {self.__musicName : self.__musicPath}
 
 class MusicBox():
     """ 音乐播放列表 """
 
-    def __init__(self, musics):
-        self.__musics = musics
+    def __init__(self):
+        self.__musics = ['music/a.mp3', 'music/b.mp3',  'music/m.mp3']
         self.pos = 0
+        # [{name:[music1, music2,...],]
+        self.__musicsLists = []
 
     def get_next(self):
         self.pos = 0 if self.pos == (len(self.__musics)-1) else self.pos + 1
@@ -29,11 +40,17 @@ class MusicBox():
     def get_last(self):
         return self.__musics[-1]
 
+    def get_list(self):
+        return self.__musics
+
+    def get_lists(self):
+        return self.__musicsLists
+
 class MusicPlayer():
     """ 播放音乐类 """
 
     def __init__(self):
-        self.__musicBox = MusicBox(['music/a.mp3', 'music/b.mp3',  'music/m.mp3'])
+        self.__musicBox = MusicBox()
         self.__isPause = False
         self.__initMixer()
 
