@@ -1,35 +1,11 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
+import sys
 import thread
 import time
 import Getch
 import music
-
-def menu(musicPlayer):
-    """ 功能菜单
-    列出播放列表
-    添加播放列表
-    设置播放次序
-    """
-    getch  = Getch.Getch()
-    while True:
-        action = getch()
-        print action
-        if action == 'h':   # help
-            pass
-        if action == 'l':
-            pass
-        if action == 'a':
-            pass
-        if action == 's':
-            pass
-        if action == 'l':
-            pass
-        if action == 'l':
-            pass
-        elif action == 'q':
-            break
 
 def print_help():
     print """
@@ -47,11 +23,50 @@ def print_help():
     q - quit
     """
 
+def print_MenuHelp():
+    print """
+    l - list list songs
+    L - list list names
+    m - set mode
+    l - next music
+    s - start
+    """
+
+def menu(musicPlayer):
+    """ 功能菜单
+    列出播放列表
+    添加播放列表
+    设置播放次序
+    """
+    print 'setting...'
+    getch  = Getch.Getch()
+    while True:
+        action = getch()
+        print action
+        if action == 'h':   # help
+            print_MenuHelp()
+        if action == 'l':   # list musicList songs
+            print musicPlayer.musicBox.get_list()
+        if action == 'L':
+            print musicPlayer.musicBox.get_lists()
+        if action == 'm':
+            m = getch()
+            musicPlayer.set_mode(m)
+            print 'mode is set to %s' %(m)
+        if action == 'l':
+            pass
+        if action == 'l':
+            pass
+        elif action == 'q':
+            print 'quit setting'
+            break
+
 def get_input(musicPlayer):
     """ 处理输入 """
     getch  = Getch.Getch()
     while True:
         action = getch()
+        print action
         if action == 'h':   # help
             print_help()
         elif action == 's': # play music
